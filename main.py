@@ -6,18 +6,14 @@ from PIL import Image, ImageTk
 
 from views.Cajero import Cajero
 from views.Interfaces import Interfaces
-from views.Botones import Botones
+from views.Estado import Estado
 
 cajero = Cajero()
-interfaz = Interfaces()
-btnes = Botones()
+interfaz = Interfaces(cajero.getRoot())
 
 #arregloScreens = [interfaz.screen0(cajero.getRoot()), interfaz.screen1(cajero.getRoot()), interfaz.screen2(cajero.getRoot())]
 
 #arregloScreens[0]
-estado = 0
-interfaz.screen0(cajero.getRoot())
-btnes.cero(cajero.getRoot(), estado)
-btnes.uno(cajero.getRoot(), estado)
+interfaz.screen0()
 
 mainloop()

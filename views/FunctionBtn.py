@@ -1,33 +1,57 @@
-from views.Interfaces import Interfaces
+from views.Estado import Estado
 from views.Persistence.cuentaDAO import *
 
 class FunctionBtn():
     def __init__(self):
-        self.interfaz = Interfaces()
+
+        self.status = Estado()
         self.operationsSQL = cuentaDAO()
 
-    def Func0(self, root, estado):
+    def Func0(self, arreglo):
 
-        self.estado = estado
-        self.root = root
+        self.arreglo = arreglo
+        print(self.status.getEstado())
 
-        if self.estado == 0:
+        if self.status.getEstado() == 0:
             try:
-                self.interfaz.screen1(self.root)
+                print(self.status.getEstado())
+                self.arreglo[1]
             except:
                 print("Algo ocurrió")
-        elif self.estado == 1:
+        elif self.status.getEstado() == 1:
             pass
     
-    def Func1(self, root , estado):
+    def Func1(self,arreglo):
 
-        self.estado = estado
-        self.root = root
+        print(self.status.getEstado())
 
-        if self.estado == 0:
+        if self.status.getEstado() == 0:
             try:
-                self.interfaz.screen0(self.root)
+                print(self.status.getEstado())
+                self.arreglo[1]
+                self.status.setEstado(1)
             except:
                 print("Algo ocurrió")
-        elif self.estado == 1:
+        elif self.status.getEstado() == 1:
+            pass
+
+    def Func2(self,arreglo):
+
+        if self.status.getEstado() == 0:
+            pass
+        elif self.status.getEstado() == 1:
+            pass
+    
+    def Func3(self,arreglo):
+
+        if self.status.getEstado() == 0:
+            pass
+        elif self.status.getEstado() == 1:
+            pass
+    
+    def Func4(self,arreglo):
+
+        if self.status.getEstado() == 0:
+            pass
+        elif self.status.getEstado() == 1:
             pass
