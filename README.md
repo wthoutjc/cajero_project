@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Proyecto Final
 
 ## Integrantes:
@@ -59,3 +60,7 @@
 ### ABSTRACT FACTORY:
 
 <p align= "Justify"> Este patrón proporciona una interfaz que nos permite crear familias de objetos, y como nuestro cajero es multibanca, lo usaremos para poder crear interfaces que tengan diseños diferentes, pero métodos idénticos. </p>
+=======
+# cajero_project
+Simulación de cajero en Python3 con Bases de Datos MySQL y libreria Tkinter
+>>>>>>> c3927a8b4ee169675d16fc8a70ff3a3092808901
