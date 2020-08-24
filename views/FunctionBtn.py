@@ -22,7 +22,7 @@ class FunctionBtn():
             self.manejoScreens.screen0()
             print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
         elif self.manejoScreens.getEstado() == 3: #BANCO
-            self.data = self.operationsSQL.
+            
             self.operationsSQL.consultarCuenta2(self.manejoScreens.getIdPersona())
 
     def Func1(self):
