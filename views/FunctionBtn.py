@@ -1,5 +1,6 @@
 from views.Persistence.cuentaDAO import *
 from views.Interfaces import Interfaces
+from views.Info import Info
 
 class FunctionBtn():
     def __init__(self, root):
@@ -8,6 +9,7 @@ class FunctionBtn():
         self.status = None
         self.operationsSQL = cuentaDAO()
         self.manejoScreens = Interfaces(self.root)
+        self.idInfo = Info()
 
     def Func0(self):
 
@@ -23,7 +25,7 @@ class FunctionBtn():
             print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
         elif self.manejoScreens.getEstado() == 3: #BANCO: CONSULTAR SALDO
             try:
-                self.data = self.operationsSQL.consultarCuenta2(self.manejoScreens.getIdPersona())
+                self.data = self.operationsSQL.consultarCuenta2(self.idInfo.getInfo())
                 self.manejoScreens.screenConsultarSaldo31(self.data[4])
             except:
                 self.manejoScreens.screenError22()
@@ -57,12 +59,15 @@ class FunctionBtn():
             try:
                 if self.datos[6] == self.manejoScreens.getPassword2():
                     if self.datos[3] == 'Agrario':
+                        self.idInfo.setInfo(self.manejoScreens.getIdPersona2())
                         self.manejoScreens.screenAgrario()
                         print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
                     elif self.datos[3] == 'Bancolombia':
+                        self.idInfo.setInfo(self.manejoScreens.getIdPersona2())
                         self.manejoScreens.screenBancolombia()
                         print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
                     elif self.datos[3] == 'Davivienda':
+                        self.idInfo.setInfo(self.manejoScreens.getIdPersona2())
                         self.manejoScreens.screenDavivienda()
                         print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
                     else:
