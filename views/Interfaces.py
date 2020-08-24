@@ -133,7 +133,7 @@ class Interfaces():
     
     def screenBancolombia(self):
 
-        self.status.setEstado(4)
+        self.status.setEstado(3)
 
         self.fondo = Label(self.root,image=self.config.setScreen(4), width = 445, height = 365 )
         self.fondo.place(x=150,y=125)
@@ -144,7 +144,7 @@ class Interfaces():
     
     def screenDavivienda(self):
 
-        self.status.setEstado(5)
+        self.status.setEstado(3)
 
         self.fondo = Label(self.root,image=self.config.setScreen(5), width = 445, height = 365 )
         self.fondo.place(x=150,y=125)
