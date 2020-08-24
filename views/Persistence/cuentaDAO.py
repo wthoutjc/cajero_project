@@ -15,15 +15,30 @@ class cuentaDAO(DAO):
             if self.elements[0] == self.id:
                 self.id = random.randint(1000, 9999)
         return self.id
-
+    
     def consultarCuenta(self):
+
         try:
             self.insertCommand = "SELECT * FROM cuenta"
             self.ncursor.execute(self.insertCommand)
             self.data = self.ncursor.fetchall()
             return self.data
         except Error as fail:
-            print("Error en conexión: {}".format(fail))
+            print("Error en consulta: {}".format(fail))
+            return None
+
+    def consultarCuenta2(self, idPersona):
+
+        self.idPersona = idPersona
+
+        try:
+            self.insertCommand = "SELECT * FROM cuenta WHERE k_persona = %s"
+            self.ncursor.execute(self.insertCommand, (int(self.idPersona), ))
+            self.data = self.ncursor.fetchone()
+            return self.data
+        except Error as fail:
+            print("Error en consulta: {}".format(fail))
+            return None
 
     def registrarCuenta(self, idCuenta, name, apellido, banco, saldo, idPersona, password):
         try:
@@ -34,10 +49,10 @@ class cuentaDAO(DAO):
         except mysql.connector.Error as fail:
             print("Error al registrar: {}".format(fail))
 
-    def updatePassword(self,idCuenta, password):
+    def updatePassword(self, idPersona, password):
         try:
-            self.insertCommand = "UPDATE cuenta SET o_password = %s WHERE idCuenta = %s"
-            self.ncursor.execute(self.insertCommand, (idCuenta, password))
+            self.insertCommand = "UPDATE cuenta SET o_password = %s WHERE k_persona = %s"
+            self.ncursor.execute(self.insertCommand, (idPersona, password))
             self.connection.commit()
             self.offConnection()
         except mysql.connector.Error as fail:
