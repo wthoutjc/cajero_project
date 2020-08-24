@@ -152,6 +152,19 @@ class Interfaces():
         self.text1.place(x=423, y = 455)
         self.text2 = Label(self.root, text = "Volver" )
         self.text2.place(x=423, y = 360)
-        
+    
+    def screenConsultarSaldo31(self, saldo):
+
+        self.saldo = saldo
+
+        self.status.setEstado(31)
+
+        self.fondo = Label(self.root,image=self.config.setScreen(2), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.r = Text(self.root, width= 100, height = 75)
+        self.r.insert(INSERT, 'Su saldo es: ' + str(self.saldo))
+        self.text1 = Label(self.root, text = "Continuar" )
+        self.text1.place(x=423, y = 455)
+
     def getEstado(self):
         return self.status.getEstado()

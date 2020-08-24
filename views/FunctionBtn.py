@@ -21,9 +21,12 @@ class FunctionBtn():
         elif self.manejoScreens.getEstado() == 12: #VOLVER
             self.manejoScreens.screen0()
             print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
-        elif self.manejoScreens.getEstado() == 3: #BANCO
-            self.data = self.operationsSQL.
-            self.operationsSQL.consultarCuenta2(self.manejoScreens.getIdPersona())
+        elif self.manejoScreens.getEstado() == 3: #BANCO: CONSULTAR SALDO
+            try:
+                self.data = self.operationsSQL.consultarCuenta2(self.manejoScreens.getIdPersona())
+                self.manejoScreens.screenConsultarSaldo31(self.data[4])
+            except:
+                self.manejoScreens.screenError22()
 
     def Func1(self):
 
