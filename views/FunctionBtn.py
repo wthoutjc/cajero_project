@@ -1,6 +1,7 @@
 from views.Persistence.cuentaDAO import *
 from views.Interfaces import Interfaces
 from views.Info import Info
+from views.mediador import mediator
 
 class FunctionBtn():
     def __init__(self, root):
@@ -105,15 +106,25 @@ class FunctionBtn():
                 self.manejoScreens.screenConfirmacion21()
 
         elif self.manejoScreens.getEstado() == 44: #RETIRAR
-            self.operationsSQL.updateSaldoRetirar(self.manejoScreens.getValorR(), self.idInfo.getInfo())
+            self.mediator =mediator(self.idInfo.getInfo(),self.manejoScreens.getValorR(),self.manejoScreens.getEstado())
+            self.mediator.conectar()
             self.manejoScreens.screenConfirmacion21()
+            #self.operationsSQL.updateSaldoRetirar(self.manejoScreens.getValorR(), self.idInfo.getInfo())
+            #self.manejoScreens.screenConfirmacion21()
 
         elif self.manejoScreens.getEstado() == 45: #CONSIGNAR
-            try:
-                self.operationsSQL.updateSaldoConsignar(self.manejoScreens.getValorC(), self.manejoScreens.getIdCuentaC())
+            self.mediator =mediator(self.manejoScreens.getIdCuentaC(),self.manejoScreens.getValorC(),self.manejoScreens.getEstado())
+            if self.mediator.conectar()==True:
                 self.manejoScreens.screenConfirmacion21()
-            except:
+            else:
                 self.manejoScreens.screenError22()
+
+            
+            #try:
+            #    self.operationsSQL.updateSaldoConsignar(self.manejoScreens.getValorC(), self.manejoScreens.getIdCuentaC())
+            #    self.manejoScreens.screenConfirmacion21()
+            #except:
+             #   self.manejoScreens.screenError22()
     def Func2(self):
         if self.manejoScreens.getEstado() == 3:
             self.manejoScreens.screenClave43()

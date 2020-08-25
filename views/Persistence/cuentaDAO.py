@@ -1,5 +1,5 @@
 import random
-
+from tkinter import messagebox as mb
 from views.Persistence.DAO import *
 
 class cuentaDAO(DAO):
@@ -71,51 +71,47 @@ class cuentaDAO(DAO):
         except mysql.connector.Error as fail:
             print("Error al cambiar password: {}".format(fail))
 
-    def updateSaldoConsignar(self, saldo, idCuenta):
-        
-        self.saldo = saldo
-        self.idCuenta = idCuenta
+    def entregaSaldoReti(self, idPersona):        
+        self.idCuenta = idPersona
+        try:
+            self.onConnection()
+            self.ncursor.execute("SELECT * FROM cuenta WHERE k_persona = %s", ((self.idCuenta), ))
+            self.data = self.ncursor.fetchone()
+            self.valor = int (self.data[4])
+            self.offConnection()
+            return self.valor
+        except mysql.connector.Error as fail:
+            print("Error: {}".format(fail))
 
+    def entregaSaldoCon(self, idCuenta):        
+        self.idCuenta = idCuenta
         try:
             self.onConnection()
             self.ncursor.execute("SELECT * FROM cuenta WHERE k_cuenta = %s", ((self.idCuenta), ))
             self.data = self.ncursor.fetchone()
-            self.newsaldo = int(self.data[4]) + int(self.saldo)
-            self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_cuenta = %s"
-            self.ncursor.execute(self.insertCommand, (self.newsaldo, self.idCuenta))
-            self.connection.commit()
+            self.valor = self.data
             self.offConnection()
+            return self.valor
         except mysql.connector.Error as fail:
             print("Error: {}".format(fail))
+
+    def updateConsignarPlatica(self, dinero,idPersona):
         
-    def updateSaldoRetirar(self, saldo, idPersona):
-        
-        self.saldo = saldo
+        self.dinero = dinero
         self.idPersona = idPersona
-
-        self.validate = True
-
+        
         try:
             self.onConnection()
-            self.ncursor.execute("SELECT * FROM cuenta WHERE k_persona = %s", ((self.idPersona), ))
-            self.data = self.ncursor.fetchone()
-            print(self.data[4])
-            print(self.saldo)
-            self.newsaldo = int(self.data[4]) - int(self.saldo)
-
-            if self.newsaldo < 0:
-                self.validate = False
-
-            if self.validate == True:
-                self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_persona = %s"
-                self.ncursor.execute(self.insertCommand, (self.newsaldo, self.idPersona))
+            if self.dinero!=None:
+                self.ncursor.execute("SET SQL_SAFE_UPDATES = 0")
+                self.ncursor.execute("UPDATE cuenta SET q_saldo = %s WHERE k_persona = %s", (self.dinero ,self.idPersona))
+                self.ncursor.execute("SET SQL_SAFE_UPDATES = 1")
                 self.connection.commit()
                 self.offConnection()
+                return True
             else:
-                self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_persona = %s"
-                self.ncursor.execute(self.insertCommand, (asdasd , asdasfdas))
-                self.connection.commit()
+                mb.showerror("Cuidado","excediste en el monto a retirar")
+                return False
         except mysql.connector.Error as fail:
             print("Error: {}".format(fail))
-    
-
+        
