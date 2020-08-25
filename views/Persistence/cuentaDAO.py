@@ -41,8 +41,8 @@ class cuentaDAO(DAO):
             self.insertCommand = "SELECT * FROM cuenta WHERE k_persona = %s"
             self.ncursor.execute(self.insertCommand, (self.idPersona, ))
             self.data = self.ncursor.fetchone()
-            return self.data
             self.offConnection()
+            return self.data
         except Error as fail:
             print("Error en consulta: {}".format(fail))
             return None
@@ -58,11 +58,18 @@ class cuentaDAO(DAO):
             print("Error al registrar: {}".format(fail))
 
     def updatePassword(self, idPersona, password):
+
+        self.idPersona = idPersona
+        self.password = password
+
         try:
             self.onConnection()
+            self.insertCommand = "SET SQL_SAFE_UPDATES = 0"
+            self.ncursor.execute(self.insertCommand)
             self.insertCommand = "UPDATE cuenta SET o_password = %s WHERE k_persona = %s"
-            self.ncursor.execute(self.insertCommand, (idPersona, password))
-            self.connection.commit()
+            self.ncursor.execute(self.insertCommand, (self.idPersona, self.password)
+            self.insertCommand = "SET SQL_SAFE_UPDATES = 1"
+            self.ncursor.execute(self.insertCommand)
             self.offConnection()
         except mysql.connector.Error as fail:
             print("Error al cambiar password: {}".format(fail))

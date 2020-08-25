@@ -87,10 +87,10 @@ class Interfaces():
         self.text2 = Label(self.root, text = "Volver" )
         self.text2.place(x=423, y = 360)
 
-        self.lblIdPersona2 =tk.Label(self.root,text= "Cédula").place(x=230, y=230)
+        self.lblIdPersona2 =tk.Label(self.root,text= "Cédula").place(x=200, y=230)
         self.idPersona2 = tk.StringVar()
         self.txtIdPersona2 = ttk.Entry(self.root,textvariable=self.idPersona2).place(x=270, y=230)
-        self.lblPassword2 =tk.Label(self.root,text= "Password").place(x=230, y=300)
+        self.lblPassword2 =tk.Label(self.root,text= "Password").place(x=200, y=300)
         self.password2 = tk.StringVar()
         self.txtPassword2 = ttk.Entry(self.root,textvariable=self.password2).place(x=270, y=300)
 
@@ -100,7 +100,7 @@ class Interfaces():
     def getPassword2(self):
         return self.password2.get()
 
-    def screenConfirmación21(self):
+    def screenConfirmacion21(self):
 
         self.status.setEstado(21)
 
@@ -119,39 +119,38 @@ class Interfaces():
         self.text1 = Label(self.root, text = "Continuar" )
         self.text1.place(x=423, y = 455)
         self.lblSuccess =tk.Label(self.root,text= "Datos incorrectos").place(x=330, y=300)
+    
+    def seteoScreens(self, x):
+
+        self.x = x
+
+        self.fondo = Label(self.root,image=self.config.setScreen(x), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.text1 = Label(self.root, text = "Consignar " )
+        self.text1.place(x=450, y = 455)
+        self.text2 = Label(self.root, text = "Consultar Saldo" )
+        self.text2.place(x=423, y = 360)
+        self.text3 = Label(self.root, text = "Retirar Dinero" )
+        self.text3.place(x=250, y = 455)
+        self.text4 = Label(self.root, text = "Cambio de Clave" )
+        self.text4.place(x=250, y = 360)
+        self.text5 = Label(self.root, text = "Salir" )
+        self.text5.place(x=460, y = 290)
 
     def screenAgrario(self):
-
+        self.seteoScreens(3)
         self.status.setEstado(3) # Estado 3 = Agrario 3,4,5 -> BANCOS
-
-        self.fondo = Label(self.root,image=self.config.setScreen(3), width = 445, height = 365 )
-        self.fondo.place(x=150,y=125)
-        self.text1 = Label(self.root, text = "Saldo" )
-        self.text1.place(x=423, y = 455)
-        self.text2 = Label(self.root, text = "Volver" )
-        self.text2.place(x=423, y = 360)
     
     def screenBancolombia(self):
 
+        self.seteoScreens(4)
         self.status.setEstado(3)
 
-        self.fondo = Label(self.root,image=self.config.setScreen(4), width = 445, height = 365 )
-        self.fondo.place(x=150,y=125)
-        self.text1 = Label(self.root, text = "Saldo" )
-        self.text1.place(x=423, y = 455)
-        self.text2 = Label(self.root, text = "Volver" )
-        self.text2.place(x=423, y = 360)
     
     def screenDavivienda(self):
 
+        self.seteoScreens(5)
         self.status.setEstado(3)
-
-        self.fondo = Label(self.root,image=self.config.setScreen(5), width = 445, height = 365 )
-        self.fondo.place(x=150,y=125)
-        self.text1 = Label(self.root, text = "Saldo" )
-        self.text1.place(x=423, y = 455)
-        self.text2 = Label(self.root, text = "Volver" )
-        self.text2.place(x=423, y = 360)
     
     def screenConsultarSaldo31(self, saldo):
 
@@ -168,3 +167,71 @@ class Interfaces():
 
     def getEstado(self):
         return self.status.getEstado()
+###############################################
+# consultar saldo
+    def screenSaldo42(self,nombre,saldo):
+
+        self.nombre = nombre
+        self.saldo = saldo
+
+        self.status.setEstado(42)
+
+        self.fondo = Label(self.root,image=self.config.setScreen(2), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.text1 = Label(self.root, text = "Continuar" )
+        self.text1.place(x=423, y = 455)
+        self.lblSaldo =tk.Label(self.root,text= "Consulta tu saldo, " + str(self.nombre)).place(x=330, y=300)
+        self.lblSaldo =tk.Label(self.root,text= "Tu saldo es: " + str(self.saldo)).place(x=330, y=340)
+        #cambio clave
+
+    def screenClave43(self):
+
+        self.status.setEstado(43)
+
+        self.fondo = Label(self.root,image=self.config.setScreen(1), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.text1 = Label(self.root, text = "Continuar" )
+        self.text1.place(x=423, y = 455)
+        self.text2 = Label(self.root, text = "Volver" )
+        self.text2.place(x=423, y = 360)
+
+        self.lablClaveActual = tk.Label(self.root, text = "Clave Actual: " ).place(x=240, y=200)
+        self.oldpassword = tk.StringVar()
+        self.txtPassword2 = ttk.Entry(self.root,textvariable=self.oldpassword).place(x=360, y=200)
+        self.lblIdPersona2 =tk.Label(self.root,text= "Clave Nueva: ").place(x=240, y=250)
+        self.newpassword = tk.StringVar()
+        self.txtIdPersona2 = ttk.Entry(self.root,textvariable=self.newpassword).place(x=360, y=250)
+    
+    def getOldPassword(self):
+        return self.oldpassword.get()
+
+    def getNewPassword(self):
+        return self.newpassword.get()
+    
+    # Retirar
+    def screenRetirar(self):
+
+        self.status.setEstado(44)
+
+        self.fondo = Label(self.root,image=self.config.setScreen(1), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.text1 = Label(self.root, text = "Continuar" )
+        self.text1.place(x=423, y = 455)
+        self.text2 = Label(self.root, text = "Volver" )
+        self.text2.place(x=423, y = 360)
+        self.text1 = Label(self.root, text = "Valor A Retirar" ).place(x=330, y=260)
+        self.lblSaldo =tk.Label(self.root,text=" ").place(x=330, y=300)
+
+    # Consignar Dinero  
+    def screenConsignar(self):
+
+        self.status.setEstado(45)
+
+        self.fondo = Label(self.root,image=self.config.setScreen(1), width = 445, height = 365 )
+        self.fondo.place(x=150,y=125)
+        self.text1 = Label(self.root, text = "Continuar" )
+        self.text1.place(x=423, y = 455)
+        self.text2 = Label(self.root, text = "Volver" )
+        self.text2.place(x=423, y = 360)
+        self.text1 = Label(self.root, text = "Valor A Consignar" ).place(x=330, y=260)
+        self.lblSaldo =tk.Label(self.root,text=" ").place(x=330, y=300)
