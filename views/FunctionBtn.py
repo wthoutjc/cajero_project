@@ -113,7 +113,9 @@ class FunctionBtn():
             print("Estado FunAntes: " + str(self.manejoScreens.getEstado()))
             self.data = self.operationsSQL.consultarCuenta2(self.idInfo.getInfo())
             if self.data[6] == self.manejoScreens.getOldPassword():
-                self.operationsSQL.updatePassword(self.idInfo.getInfo(), self.manejoScreens.getNewPassword())
+                print("NEW: "+str(self.manejoScreens.getNewPassword()))
+                print("NEW: "+str(self.idInfo.getInfo()))
+                self.operationsSQL.updatePassword(self.manejoScreens.getNewPassword(), self.idInfo.getInfo())
                 self.manejoScreens.screenConfirmacion21()
                 print("Estado FunDESPUES: " + str(self.manejoScreens.getEstado()))
 

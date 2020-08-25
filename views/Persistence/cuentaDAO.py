@@ -57,19 +57,17 @@ class cuentaDAO(DAO):
         except mysql.connector.Error as fail:
             print("Error al registrar: {}".format(fail))
 
-    def updatePassword(self, idPersona, password):
+    def updatePassword(self, password, idPersona):
 
-        self.idPersona = idPersona
         self.password = password
-
+        self.idPersona = idPersona
+        
         try:
             self.onConnection()
-            self.insertCommand = "SET SQL_SAFE_UPDATES = 0"
-            self.ncursor.execute(self.insertCommand)
-            self.insertCommand = "UPDATE cuenta SET o_password = %s WHERE k_persona = %s"
-            self.ncursor.execute(self.insertCommand, (self.idPersona, self.password)
-            self.insertCommand = "SET SQL_SAFE_UPDATES = 1"
-            self.ncursor.execute(self.insertCommand)
+            self.ncursor.execute("SET SQL_SAFE_UPDATES = 0")
+            self.ncursor.execute("UPDATE cuenta SET o_password = %s WHERE k_persona = %s", (self.password ,self.idPersona))
+            self.ncursor.execute("SET SQL_SAFE_UPDATES = 1")
+            self.connection.commit()
             self.offConnection()
         except mysql.connector.Error as fail:
             print("Error al cambiar password: {}".format(fail))
