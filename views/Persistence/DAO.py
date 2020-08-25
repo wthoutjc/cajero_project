@@ -12,7 +12,7 @@ class DAO():
             self.connection = mysql.connector.connect(
                 host="localhost",
                 user="root",
-                passwd="9498",
+                passwd="mysql2019",
                 database="cajero")
             
             self.ncursor = self.connection.cursor()
