@@ -7,7 +7,7 @@ class FunctionBtn():
 
         self.root = root
         self.status = None
-        self.operationsSQL = cuentaDAO()
+        self.operationsSQL = cuentaDAO.get_instance()
         self.manejoScreens = Interfaces(self.root)
         self.idInfo = Info()
 

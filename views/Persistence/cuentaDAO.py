@@ -3,9 +3,6 @@ import random
 from views.Persistence.DAO import *
 
 class cuentaDAO(DAO):
-
-    def __init__(self):
-        DAO.__init__(self)
     
     def crearID(self):
         self.onConnection()
