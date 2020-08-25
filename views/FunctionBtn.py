@@ -107,10 +107,10 @@ class FunctionBtn():
 
         elif self.manejoScreens.getEstado() == 44: #RETIRAR
             self.mediator =mediator(self.idInfo.getInfo(),self.manejoScreens.getValorR(),self.manejoScreens.getEstado())
-            self.mediator.conectar()
-            self.manejoScreens.screenConfirmacion21()
-            #self.operationsSQL.updateSaldoRetirar(self.manejoScreens.getValorR(), self.idInfo.getInfo())
-            #self.manejoScreens.screenConfirmacion21()
+            if self.mediator.conectar() == True:
+                self.manejoScreens.screenConfirmacion21()
+            else:
+                self.manejoScreens.screenError22()
 
         elif self.manejoScreens.getEstado() == 45: #CONSIGNAR
             self.mediator =mediator(self.manejoScreens.getIdCuentaC(),self.manejoScreens.getValorC(),self.manejoScreens.getEstado())
@@ -119,12 +119,6 @@ class FunctionBtn():
             else:
                 self.manejoScreens.screenError22()
 
-            
-            #try:
-            #    self.operationsSQL.updateSaldoConsignar(self.manejoScreens.getValorC(), self.manejoScreens.getIdCuentaC())
-            #    self.manejoScreens.screenConfirmacion21()
-            #except:
-             #   self.manejoScreens.screenError22()
     def Func2(self):
         if self.manejoScreens.getEstado() == 3:
             self.manejoScreens.screenClave43()

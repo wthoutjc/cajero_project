@@ -1,6 +1,11 @@
 from views.Persistence.cuentaDAO import *
+
+from tkinter import messagebox as mb
+
 class mediator():
-    def __init__(self,idperson,diner,accion):
+
+    def __init__(self, idperson, diner, accion):
+
        self.id=idperson
        self.Dinero = int (diner)
        self.accion =accion 
@@ -20,15 +25,17 @@ class mediator():
 
 
     def conectar(self):
-        print(self.id)        
-        if self.accion==45:
-            self.arr=self.basesD.entregaSaldoCon(self.id)
-            self.dine1= int (self.arr[4])
-            self.idperson = self.arr[5] 
-            print(self.idperson)           
-            self.resultado=self.sumar(self.dine1,self.Dinero)
-            return self.basesD.updateConsignarPlatica(self.resultado,self.idperson)
-        elif self.accion==44:
-            self.dine1 =self.basesD.entregaSaldoReti(self.id)
-            self.resultado=self.restar(self.dine1,self.Dinero)
-            return self.basesD.updateConsignarPlatica(self.resultado,self.id)   
+        try: 
+            if self.accion==45:
+                self.arr=self.basesD.entregaSaldoCon(self.id)
+                self.dine1= int (self.arr[4])
+                self.idperson = self.arr[5] 
+                print(self.idperson)           
+                self.resultado=self.sumar(self.dine1,self.Dinero)
+                return self.basesD.updateConsignarPlatica(self.resultado,self.idperson)
+            elif self.accion==44:
+                self.dine1 =self.basesD.entregaSaldoReti(self.id)
+                self.resultado=self.restar(self.dine1,self.Dinero)
+                return self.basesD.updateConsignarPlatica(self.resultado,self.id)  
+        except:
+            mb.showerror("Error: ","Datos no existentes")
