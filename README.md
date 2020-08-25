@@ -20,13 +20,21 @@
 
 ![abstract factory](Sprites/Pantalla/0.png)
 
-<p align= "Justify"> En esta interfaz el usuario podrá crear una cuenta y entrar a su cuenta en caso de que esta ya exista. </p>
+<p align= "Justify"> En esta interfaz el usuario podrá crear una cuenta y/o entrar a su cuenta en caso de que esta ya exista. </p>
 
-### Pantallas de registro:
+### Pantallas de interactivas:
+
+#### Continuar y Volver
 
 ![abstract factory](Sprites/Pantalla/1.png)
 
-<p align= "Justify"> En esta pantalla el usuario podrá validar la información proporcionada y confirmar el numero de su cuenta, o podrá volver en dado caso de que sienta que proporciono algún dato de manera errónea. </p>
+<p align= "Justify"> Esta pantalla permitirá al usuario poder darle al botón de continuar, el cual validará la información que dependerá de las acciones las cuales este interactuando el usuario con el cajero, por ejemplo, si el usuario quiere registrarse tendrá la opción de devolverse en caso de que haya cometido una equivocación, como también tendrá la opción de continuar para registrar su cuenta. </p>
+
+#### Solo continuar
+
+![abstract factory](Sprites/Pantalla/2.png)
+
+<p align= "Justify"> Esta pantalla no le permite al usuario poder devolverse, el propósito de esta pantalla es mostrar mensajes de confirmación dada una exitosa o errónea validación de los datos. </p>
 
 ### Pantalla de Bancos:
 
@@ -42,20 +50,28 @@
 
 ![abstract factory](Sprites/Pantalla/Davivienda.png)
 
-<p align= "Justify"> Estas interfaces cambian según el nombre del banco en el que la cuenta este registrada, sin embargo, las funcionalidades se mantienen </p>
+<p align= "Justify"> Estas interfaces cambian según el nombre del banco en el que la cuenta este registrada, sin embargo, las funcionalidades se mantienen, es decir, son las mismas para cualquier tipo de banco. </p>
 
 ### Cajero:
 
 ![abstract factory](Sprites/Cajero/DiseñoSprites.png)
 
-<p align= "Justify"> En el cajero se centrará el manejo de interfaces de los sprites de pantalla mencionados anteriormente, incluye 6 slots de botones para la ejecución de comandos y 2 slots para entrada y salida de efectivo. </p>
+<p align= "Justify"> En el cajero se centrará el manejo de interfaces de los sprites de pantalla mencionados anteriormente, incluye 6 slots de botones para la ejecución de comandos. </p>
+
+## Modelo, Vista, Controlador
+
+<p align= "Justify"> En la ruta de este Git, podemos ver como tenemos 3 packages, uno dentro de otro, para poder hacer bien los respectivos imports tienen un orden jerárquico donde esta la parte de las vistas (views) donde se maneja el tema de las interfaces y lógica de ordenamiento, luego el controlador que maneja arreglos en base a la creación de modelos, nos permite establecer un entorno de desarrollo mas gestionable. </p>
 
 ## Patrones:
 
-### FACADE:
+### Abstract Factory:
 
-<p align= "Justify"> Este patrón al proporcionar una interfaz unificada nos facilita el manejo de un conjunto de interfaces adaptadas a la simulación, lo que nos permite un mejor manejo de la estructura de los patrones y ejecución de operaciones. </p>
+<p align= "Justify"> Este patrón esta enfocado en el manejo de la interfaz, cuyo propósito es hacer que las factorías generen interfaces mediante la creación de familias de objetos, que van variando según la necesidad de la aplicación, estos productos concretos nos devuelven las rutas de almacenamiento de los sprites, que representan las pantallas que tienen una interacción directa con el usuario, debido que nuestro cajero es multi bancos, las factorias nos permiten cargar el banco asociado respectivamente. </p>
 
-### ABSTRACT FACTORY:
+### BUILDER:
 
-<p align= "Justify"> Este patrón proporciona una interfaz que nos permite crear familias de objetos, y como nuestro cajero es multibanca, lo usaremos para poder crear interfaces que tengan diseños diferentes, pero métodos idénticos. </p>
+<p align= "Justify"> Este patrón nos permite separar la construcción de los productos concretos en el Abstract Factory de su representación, lo que permite a las interfaces poder crear diferentes representaciones y hacer que la transición de imágenes pueda ser mas gestionable. </p>
+
+### MEDIATOR:
+
+<p align= "Justify"> Este patrón fue introducido en la aplicación con el propósito de poder encapsular las interacciones de los botones, definiendo una función conectar() la cual promueve un bajo acoplamiento para que las operaciones SQL de la clase no se refiera explícitamente con el manejo de las funciones de los botones, haciendo que la interacción entre estas clases se pueda realizar de manera independiente. </p>
