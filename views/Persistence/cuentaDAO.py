@@ -34,8 +34,7 @@ class cuentaDAO(DAO):
     def consultarCuenta2(self, idPersona):
 
         self.idPersona = idPersona
-        print(self.idPersona)
-
+ 
         try:
             self.onConnection()
             self.insertCommand = "SELECT * FROM cuenta WHERE k_persona = %s"
@@ -72,12 +71,51 @@ class cuentaDAO(DAO):
         except mysql.connector.Error as fail:
             print("Error al cambiar password: {}".format(fail))
 
-    def updateSaldo(self,idCuenta, saldo):
+    def updateSaldoConsignar(self, saldo, idCuenta):
+        
+        self.saldo = saldo
+        self.idCuenta = idCuenta
+
         try:
             self.onConnection()
-            self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE idCuenta = %s"
-            self.ncursor.execute(self.insertCommand, (idCuenta, saldo))
+            self.ncursor.execute("SELECT * FROM cuenta WHERE k_cuenta = %s", ((self.idCuenta), ))
+            self.data = self.ncursor.fetchone()
+            self.newsaldo = int(self.data[4]) + int(self.saldo)
+            self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_cuenta = %s"
+            self.ncursor.execute(self.insertCommand, (self.newsaldo, self.idCuenta))
             self.connection.commit()
             self.offConnection()
         except mysql.connector.Error as fail:
-            print("Error al cambiar password: {}".format(fail))
+            print("Error: {}".format(fail))
+        
+    def updateSaldoRetirar(self, saldo, idPersona):
+        
+        self.saldo = saldo
+        self.idPersona = idPersona
+
+        self.validate = True
+
+        try:
+            self.onConnection()
+            self.ncursor.execute("SELECT * FROM cuenta WHERE k_persona = %s", ((self.idPersona), ))
+            self.data = self.ncursor.fetchone()
+            print(self.data[4])
+            print(self.saldo)
+            self.newsaldo = int(self.data[4]) - int(self.saldo)
+
+            if self.newsaldo < 0:
+                self.validate = False
+
+            if self.validate == True:
+                self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_persona = %s"
+                self.ncursor.execute(self.insertCommand, (self.newsaldo, self.idPersona))
+                self.connection.commit()
+                self.offConnection()
+            else:
+                self.insertCommand = "UPDATE cuenta SET q_saldo = %s WHERE k_persona = %s"
+                self.ncursor.execute(self.insertCommand, (asdasd , asdasfdas))
+                self.connection.commit()
+        except mysql.connector.Error as fail:
+            print("Error: {}".format(fail))
+    
+

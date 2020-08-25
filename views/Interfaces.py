@@ -219,9 +219,14 @@ class Interfaces():
         self.text1.place(x=423, y = 455)
         self.text2 = Label(self.root, text = "Volver" )
         self.text2.place(x=423, y = 360)
-        self.text1 = Label(self.root, text = "Valor A Retirar" ).place(x=330, y=260)
-        self.lblSaldo =tk.Label(self.root,text=" ").place(x=330, y=300)
 
+        self.lablConsignar = tk.Label(self.root, text = "Valor a retirar: " ).place(x=240, y=250)
+        self.valorR = tk.StringVar()
+        self.txtPassword2 = ttk.Entry(self.root,textvariable=self.valorR).place(x=360, y=250)
+
+    def getValorR(self):
+        return self.valorR.get()
+        
     # Consignar Dinero  
     def screenConsignar(self):
 
@@ -233,5 +238,16 @@ class Interfaces():
         self.text1.place(x=423, y = 455)
         self.text2 = Label(self.root, text = "Volver" )
         self.text2.place(x=423, y = 360)
-        self.text1 = Label(self.root, text = "Valor A Consignar" ).place(x=330, y=260)
-        self.lblSaldo =tk.Label(self.root,text=" ").place(x=330, y=300)
+
+        self.lablClaveActual = tk.Label(self.root, text = "idCuenta: " ).place(x=240, y=200)
+        self.idCuentaC = tk.StringVar()
+        self.txtPassword2 = ttk.Entry(self.root,textvariable=self.idCuentaC).place(x=360, y=200)
+        self.lablConsignar = tk.Label(self.root, text = "Valor a Consignar: " ).place(x=240, y=250)
+        self.valorC = tk.StringVar()
+        self.txtPassword2 = ttk.Entry(self.root,textvariable=self.valorC).place(x=360, y=250)
+
+    def getIdCuentaC(self):
+        return self.idCuentaC.get()
+
+    def getValorC(self):
+        return self.valorC.get()
