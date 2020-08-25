@@ -4,9 +4,19 @@ from mysql.connector import errorcode
 
 class DAO():
 
+    _DAO_instance = None
+
     def __init__(self):
         self.onConnection()
     
+    @classmethod
+    def get_instance(cls):
+
+        if not DAO._DAO_instance:
+            _DAO_instance = cls()
+            _DAO_instance.onConnection()
+        return _DAO_instance
+
     def onConnection(self):
         try:
             self.connection = mysql.connector.connect(
