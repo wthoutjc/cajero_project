@@ -79,3 +79,11 @@
 ### MEDIATOR:
 
 <p align= "Justify"> Este patrón fue introducido en la aplicación con el propósito de poder encapsular las interacciones de los botones, definiendo una función conectar() la cual promueve un bajo acoplamiento para que las operaciones SQL de la clase no se refiera explícitamente con el manejo de las funciones de los botones, haciendo que la interacción entre estas clases se pueda realizar de manera independiente. </p>
+
+### SINGLETON
+
+<p align= "Justify"> Se utiliza el patrón Singleton en la clase DAO y la clase CuentaDAO que hereda de la anterior, esto con el fin de que exista un único punto de acceso a la base de datos,lo que garantiza que las operaciones se realicen una a una. </p>
+
+### MEMENTO
+
+<p align= "Justify"> El patrón Memento nos permite guardar el estado de la información al realizar la transición entre interfaces, de tal forma que pueda recuperarse para posteriores operaciones. </p>
