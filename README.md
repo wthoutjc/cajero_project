@@ -6,6 +6,10 @@
 - Jhonatan Guillermo Ruíz Bautista  - 20181020034
 - Juan Camilo Ramírez Rátiva        - 20181020044
 
+## UML
+
+![abstract factory](https://github.com/wthoutjc/cajero_project/blob/master/Final.jpg)
+
 ## Introducción
 
 <p align= "Justify"> En el presente documento se va a registrar la documentación del proyecto final de la asignatura de modelos de programación I, con el objetivo de explicar y determinar de manera formal la estructura e implementación de nuestro proyecto, el cual consiste en simular un cajero automático multibanca que permita a los usuarios abrir una cuenta, realizar operaciones varias y consultar su estado de cuenta. </p>
